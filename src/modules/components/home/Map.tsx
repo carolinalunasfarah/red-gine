@@ -3,92 +3,64 @@
 import { useEffect, useRef } from "react";
 import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
+import type { CenterPin } from "@/src/modules/healthCenters/types";
+import {
+    MAP_FIT_PADDING,
+    MAP_STYLE,
+    METROPOLITAN_REGION_BOUNDS,
+} from "./constants";
+import { createPinElement } from "./functions";
 
 maplibregl.setWorkerUrl(
-  new URL(
-    "../../../../node_modules/maplibre-gl/dist/maplibre-gl-worker.mjs",
-    import.meta.url,
-  ).href,
+    new URL(
+        "../../../../node_modules/maplibre-gl/dist/maplibre-gl-worker.mjs",
+        import.meta.url,
+    ).href,
 );
 
-interface CentroAtencion {
-  nombreCentro: string;
-  comuna: string;
-  region: string;
-  lat: number;
-  lng: number;
-}
+export function Map({ pins }: { pins: CenterPin[] }) {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const mapRef = useRef<maplibregl.Map | null>(null);
+    const markersRef = useRef<maplibregl.Marker[]>([]);
 
-export interface Ginecologa {
-  id: string;
-  nombre: string;
-  apellidos: string;
-  contacto: {
-    instagram?: string;
-    email?: string;
-  };
-  centros: CentroAtencion[];
-  verificado: boolean;
-}
+    useEffect(() => {
+        if (!containerRef.current || mapRef.current) return;
 
-export function Map({ ginecologas }: { ginecologas: Ginecologa[] }) {
-  const containerRef = useRef<HTMLDivElement>(null);
+        const map = new maplibregl.Map({
+            container: containerRef.current,
+            style: MAP_STYLE,
+            bounds: METROPOLITAN_REGION_BOUNDS,
+            fitBoundsOptions: { padding: MAP_FIT_PADDING },
+        });
 
-  useEffect(() => {
-    if (!containerRef.current) return;
+        map.addControl(new maplibregl.NavigationControl(), "top-right");
+        mapRef.current = map;
 
-    const map = new maplibregl.Map({
-      container: containerRef.current,
-      style: "https://tiles.openfreemap.org/styles/positron",
-      center: [-70.67, -33.45],
-      zoom: 4,
-    });
+        const resizeObserver = new ResizeObserver(() => {
+            map.resize();
+        });
+        resizeObserver.observe(containerRef.current);
 
-    map.addControl(new maplibregl.NavigationControl(), "top-right");
+        return () => {
+            resizeObserver.disconnect();
+            for (const marker of markersRef.current) marker.remove();
+            markersRef.current = [];
+            map.remove();
+            mapRef.current = null;
+        };
+    }, []);
 
-    const coordinates: [number, number][] = [];
-    const pinColor =
-      getComputedStyle(document.documentElement)
-        .getPropertyValue("--color-brand-background")
-        .trim() || "#664b7c";
+    useEffect(() => {
+        const map = mapRef.current;
+        if (!map) return;
 
-    for (const ginecologa of ginecologas) {
-      for (const centro of ginecologa.centros) {
-        const coordinate: [number, number] = [centro.lng, centro.lat];
-        coordinates.push(coordinate);
+        for (const marker of markersRef.current) marker.remove();
+        markersRef.current = pins.map((pin) =>
+            new maplibregl.Marker({ element: createPinElement(pin.count) })
+                .setLngLat([pin.lng, pin.lat])
+                .addTo(map),
+        );
+    }, [pins]);
 
-        new maplibregl.Marker({ color: pinColor })
-          .setLngLat(coordinate)
-          .setPopup(
-            new maplibregl.Popup().setText(
-              `${ginecologa.nombre} ${ginecologa.apellidos} · ${centro.nombreCentro}`,
-            ),
-          )
-          .addTo(map);
-      }
-    }
-
-    if (coordinates.length === 1) {
-      map.setCenter(coordinates[0]);
-      map.setZoom(12);
-    } else if (coordinates.length > 1) {
-      const bounds = coordinates.reduce(
-        (nextBounds, coordinate) => nextBounds.extend(coordinate),
-        new maplibregl.LngLatBounds(coordinates[0], coordinates[0]),
-      );
-      map.fitBounds(bounds, { padding: 80, maxZoom: 11 });
-    }
-
-    const resizeObserver = new ResizeObserver(() => {
-      map.resize();
-    });
-    resizeObserver.observe(containerRef.current);
-
-    return () => {
-      resizeObserver.disconnect();
-      map.remove();
-    };
-  }, [ginecologas]);
-
-  return <div ref={containerRef} className="h-full w-full" />;
+    return <div ref={containerRef} className="h-full w-full overflow-hidden rounded-lg" />;
 }
