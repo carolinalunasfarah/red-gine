@@ -1,5 +1,9 @@
+import { HomePageContent } from "@/src/modules/components/home";
+
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center"></div>
+    <div className="min-h-screen sm:min-h-dvh">
+      <HomePageContent />
+    </div>
   );
 }
