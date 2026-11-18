@@ -62,5 +62,10 @@ export function Map({ pins }: { pins: CenterPin[] }) {
         );
     }, [pins]);
 
-    return <div ref={containerRef} className="h-full w-full overflow-hidden rounded-lg" />;
+    return (
+        <div
+            ref={containerRef}
+            className="min-h-0 w-full flex-1 overflow-hidden rounded-lg"
+        />
+    );
 }

@@ -1,9 +1,12 @@
-import { HomePageContent } from "@/src/modules/components/home";
+import { HomePageContent, Map } from "@/src/modules/components/home";
+import { getCenterPins } from "@/src/modules/healthCenters/queries";
 
-export default function Home() {
-  return (
-    <div className="min-h-screen sm:min-h-dvh">
-      <HomePageContent />
-    </div>
-  );
+export default async function Home() {
+    const pins = await getCenterPins();
+
+    return (
+        <div className="min-h-screen sm:min-h-dvh">
+            <HomePageContent map={<Map pins={pins} />} />
+        </div>
+    );
 }
