@@ -1,19 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-background: #664b7c;
-  --color-brand-surface: #c5b6d2;
-  --color-brand-text: #ffffff;
-  --color-brand-accent: #405c37;
+    --color-brand-background: #664b7c;
+    --color-brand-surface: #c5b6d2;
+    --color-brand-text: #ffffff;
+    --color-brand-accent: #405c37;
+    --color-brand-surface-text: #2e2e2e;
 
-  --color-system-destructive: #920c0c;
-  --color-system-success: #83a366;
-  --color-system-warning: #f57105;
-  --color-system-info: #4b4b7d;
+    --color-system-destructive: #920c0c;
+    --color-system-success: #83a366;
+    --color-system-warning: #f57105;
+    --color-system-info: #4b4b7d;
 }
 
 @layer base {
-  html {
-    cursor: default;
-  }
+    html {
+        cursor: default;
+    }
 }

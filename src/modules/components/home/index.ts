@@ -1,3 +1,4 @@
+export * from "./CenterDrawer";
 export * from "./functions";
 export * from "./HomePageContent";
 export * from "./Information";

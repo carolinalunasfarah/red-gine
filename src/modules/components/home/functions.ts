@@ -13,6 +13,7 @@ export function createPinElement(count: number) {
     pin.style.fontSize = "13px";
     pin.style.border = "2px solid #ffffff";
     pin.style.boxShadow = "0 1px 4px rgba(0, 0, 0, 0.35)";
+    pin.style.cursor = "pointer";
 
     return pin;
 }
