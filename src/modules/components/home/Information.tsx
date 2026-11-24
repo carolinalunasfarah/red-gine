@@ -1,7 +1,18 @@
+import Image from "next/image";
+
 export const Information = () => {
     return (
         <div>
-            <h2 className="text-xl font-bold mb-2">Red Gine</h2>
+            <article className="mb-4 flex items-center gap-2">
+                <Image
+                    src="/logo-accent.png"
+                    alt="Red Gine"
+                    width={100}
+                    height={100}
+                    className="size-14"
+                />
+                <h2 className="text-xl font-bold mb-2">Red Gine</h2>
+            </article>
             <p className="text-md">
                 Garantizar una atención médica empática, informada y libre de
                 estigmas es parte de la ética en salud. En el marco de la ley
