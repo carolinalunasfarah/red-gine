@@ -4,7 +4,7 @@ export function createPinElement(count: number) {
     pin.style.width = "28px";
     pin.style.height = "28px";
     pin.style.borderRadius = "999px";
-    pin.style.background = "#664b7c";
+    pin.style.background = "#405c37";
     pin.style.color = "#ffffff";
     pin.style.display = "flex";
     pin.style.alignItems = "center";
