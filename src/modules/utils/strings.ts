@@ -1,3 +1,17 @@
+export function includesSpanish(value: string, query: string) {
+    const foldedQuery = foldSpanish(query.trim());
+    if (!foldedQuery) return true;
+
+    return foldSpanish(value).includes(foldedQuery);
+}
+
+function foldSpanish(value: string) {
+    return value
+        .toLocaleLowerCase("es")
+        .normalize("NFD")
+        .replace(/[\u0300-\u0302\u0304-\u036f]/g, "");
+}
+
 export function compareSpanish(a: string, b: string) {
     return a.localeCompare(b, "es", { sensitivity: "base" });
 }

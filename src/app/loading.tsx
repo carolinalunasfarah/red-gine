@@ -1,4 +1,5 @@
-import { HomePageContent, MapSkeleton } from "@/src/modules/components/home";
+import { HomePageContent } from "@/src/modules/components/home/HomePageContent";
+import { MapSkeleton } from "@/src/modules/components/home/MapSkeleton";
 
 export default function Loading() {
     return (

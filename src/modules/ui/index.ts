@@ -6,4 +6,6 @@ export * from "./DropdownMenu";
 export * from "./ErrorMessage";
 export * from "./Input";
 export * from "./Label";
+export * from "./Select";
 export * from "./Skeleton";
+export * from "./Tabs";

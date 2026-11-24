@@ -13,7 +13,9 @@ export async function getCenterPins(): Promise<CenterPin[]> {
         [
             supabase
                 .from("health_centers")
-                .select("id, name, comuna, region, lat, lng, address"),
+                .select(
+                "id, name, comuna, region, lat, lng, address, isOnline",
+            ),
             supabase
                 .from("gynecologists")
                 .select("id, name, lastname, instagram, email")
@@ -61,7 +63,8 @@ export async function getCenterPins(): Promise<CenterPin[]> {
     }
 
     return ((centersResult.data ?? []) as HealthCenter[]).flatMap((row) => {
-        if (row.lat == null || row.lng == null) return [];
+        const isOnline = row.isOnline === true;
+        if (!isOnline && (row.lat == null || row.lng == null)) return [];
 
         const gynecologists = [
             ...(gynecologistsByCenter.get(row.id)?.values() ?? []),
@@ -78,8 +81,9 @@ export async function getCenterPins(): Promise<CenterPin[]> {
                 id: row.id,
                 name: row.name?.trim() || "Centro",
                 count: gynecologists.length,
-                lat: row.lat,
-                lng: row.lng,
+                lat: isOnline ? null : row.lat,
+                lng: isOnline ? null : row.lng,
+                isOnline,
                 address: row.address?.trim() || null,
                 comuna: row.comuna?.trim() || null,
                 region: row.region?.trim() || null,

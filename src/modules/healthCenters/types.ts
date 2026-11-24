@@ -10,8 +10,9 @@ export type CenterPin = {
     id: string;
     name: string;
     count: number;
-    lat: number;
-    lng: number;
+    lat: number | null;
+    lng: number | null;
+    isOnline: boolean;
     address: string | null;
     comuna: string | null;
     region: string | null;

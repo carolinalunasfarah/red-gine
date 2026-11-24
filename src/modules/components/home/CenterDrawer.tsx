@@ -11,7 +11,8 @@ import {
     DrawerHeader,
     DrawerTitle,
 } from "@/src/modules/ui";
-import { instagramHref } from "@/src/modules/utils";
+import type { SwipeDirection } from "./types";
+import { instagramHref } from "./utils";
 
 export function CenterDrawer({
     pin,
@@ -22,7 +23,7 @@ export function CenterDrawer({
     pin: CenterPin | null;
     open: boolean;
     onOpenChange: (open: boolean) => void;
-    swipeDirection: "down" | "right";
+    swipeDirection: SwipeDirection;
 }) {
     const destination = pin?.address
         ? encodeURIComponent(
@@ -117,7 +118,7 @@ export function CenterDrawer({
                                                         target="_blank"
                                                         rel="noopener noreferrer"
                                                         className="col-start-2 row-start-2 text-brand-surface-text underline">
-                                                        @{instagram.handle}
+                                                        {instagram.handle}
                                                     </a>
                                                 ) : (
                                                     email && (
