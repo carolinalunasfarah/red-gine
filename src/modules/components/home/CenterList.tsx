@@ -13,7 +13,7 @@ export function CenterList({
 }) {
     return (
         <section className={className}>
-            <h2 className="mb-2 text-sm font-medium">{title}</h2>
+            <h2 className="mb-2 text-sm md:text-basefont-medium">{title}</h2>
             <ul className="flex flex-col gap-2 overflow-y-auto">
                 {pins.map((pin) => (
                     <li key={pin.id}>

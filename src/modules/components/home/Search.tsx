@@ -47,15 +47,17 @@ export function Search({
 
     return (
         <div className="flex flex-col gap-2">
-            <div className="flex flex-wrap gap-2">
+            <div className="flex w-full gap-2">
                 <Button
                     size="sm"
+                    className="min-w-0 flex-1 shrink md:w-auto md:flex-none"
                     variant={value.mode === "center" ? "secondary" : "outline"}
                     onClick={() => onChange({ ...value, mode: "center" })}>
                     Centro
                 </Button>
                 <Button
                     size="sm"
+                    className="min-w-0 flex-1 shrink md:w-auto md:flex-none"
                     variant={
                         value.mode === "gynecologist" ? "secondary" : "outline"
                     }
@@ -66,7 +68,7 @@ export function Search({
                 </Button>
             </div>
             {value.mode === "center" ? (
-                <div className="flex flex-col gap-2 md:flex-row">
+                <div className="flex w-full flex-col gap-4 md:flex-row">
                     <Select
                         value={value.place || null}
                         onValueChange={(next) =>
@@ -76,7 +78,7 @@ export function Search({
                                 comuna: "",
                             })
                         }>
-                        <SelectTrigger className="w-full md:w-56">
+                        <SelectTrigger className="w-full min-w-0 flex-1">
                             <SelectValue placeholder="Región" />
                         </SelectTrigger>
                         <SelectContent>
@@ -102,12 +104,15 @@ export function Search({
                             onValueChange={(next) =>
                                 onChange({ ...value, comuna: next ?? "" })
                             }>
-                            <SelectTrigger className="w-full md:w-56">
+                            <SelectTrigger className="w-full min-w-0 flex-1">
                                 <SelectValue placeholder="Comuna" />
                             </SelectTrigger>
                             <SelectContent>
                                 {comunas.map((item) => (
-                                    <SelectItem key={item} value={item} multiline>
+                                    <SelectItem
+                                        key={item}
+                                        value={item}
+                                        multiline>
                                         {item}
                                     </SelectItem>
                                 ))}
@@ -123,14 +128,18 @@ export function Search({
                             })
                         }
                         placeholder="Nombre del centro"
-                        className="md:max-w-xs"
+                        className="min-w-0 flex-1"
                     />
-                    <Button size="sm" variant="outline" onClick={clearFilters}>
+                    <Button
+                        size="sm"
+                        variant="secondary"
+                        className="w-full md:h-10 md:w-auto"
+                        onClick={clearFilters}>
                         Limpiar
                     </Button>
                 </div>
             ) : (
-                <div className="flex flex-col gap-2 md:flex-row">
+                <div className="flex w-full flex-col gap-4 md:flex-row">
                     <Input
                         value={value.gynecologistQuery}
                         onChange={(event) =>
@@ -140,9 +149,13 @@ export function Search({
                             })
                         }
                         placeholder="Nombre o apellido"
-                        className="md:max-w-xs"
+                        className="min-w-0 flex-1"
                     />
-                    <Button size="sm" variant="outline" onClick={clearFilters}>
+                    <Button
+                        size="sm"
+                        variant="secondary"
+                        className="w-full md:h-10 md:w-auto"
+                        onClick={clearFilters}>
                         Limpiar
                     </Button>
                 </div>

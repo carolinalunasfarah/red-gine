@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { CenterPin } from "@/src/modules/healthCenters/types";
-import { CenterResults } from "./CenterResults";
+import { Results } from "./Results";
 import { Search } from "./Search";
 import type { SearchState } from "./types";
 import { filterCenters } from "./utils";
@@ -15,7 +15,7 @@ const initialSearch: SearchState = {
     gynecologistQuery: "",
 };
 
-export function CenterExplorer({ pins }: { pins: CenterPin[] }) {
+export function Explorer({ pins }: { pins: CenterPin[] }) {
     const [search, setSearch] = useState<SearchState>(initialSearch);
     const query =
         search.mode === "center"
@@ -48,9 +48,10 @@ export function CenterExplorer({ pins }: { pins: CenterPin[] }) {
                 resultCount={results.length}
                 onChange={setSearch}
             />
-            <CenterResults
+            <Results
                 placed={placed}
                 online={online}
+                mode={search.mode}
                 resultCount={results.length}
                 hasFilter={Boolean(
                     search.place || search.comuna || query.trim(),

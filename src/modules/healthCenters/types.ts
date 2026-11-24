@@ -4,6 +4,7 @@ export type Gynecologist = {
     lastname: string;
     instagram: string | null;
     email: string | null;
+    centers?: CenterPin[] | null;
 };
 
 export type CenterPin = {

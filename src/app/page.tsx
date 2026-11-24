@@ -1,4 +1,4 @@
-import { CenterExplorer, HomePageContent } from "@/src/modules/components/home";
+import { Explorer, HomePageContent } from "@/src/modules/components/home";
 import { getCenterPins } from "@/src/modules/healthCenters/queries";
 
 export default async function Home() {
@@ -6,7 +6,7 @@ export default async function Home() {
 
     return (
         <div className="min-h-screen sm:min-h-dvh">
-            <HomePageContent map={<CenterExplorer pins={pins} />} />
+            <HomePageContent map={<Explorer pins={pins} />} />
         </div>
     );
 }
