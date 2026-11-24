@@ -24,7 +24,7 @@ function Tabs({
 }
 
 const tabsListVariants = cva(
-    "group/tabs-list inline-flex w-fit items-center justify-center rounded-lg p-2 text-brand-surface-text group-data-horizontal/tabs:h-8 group-data-vertical/tabs:h-fit group-data-vertical/tabs:flex-col data-[variant=line]:rounded-none",
+    "group/tabs-list inline-flex w-fit items-center justify-center rounded-2xl p-2 text-brand-surface-text group-data-horizontal/tabs:h-8 group-data-vertical/tabs:h-fit group-data-vertical/tabs:flex-col data-[variant=line]:rounded-none",
     {
         variants: {
             variant: {
@@ -58,7 +58,7 @@ function TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {
         <TabsPrimitive.Tab
             data-slot="tabs-trigger"
             className={cn(
-                "relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md cursor-pointer",
+                "relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-2xl cursor-pointer",
                 "border border-transparent px-1.5 py-0.5 text-sm font-medium whitespace-nowrap text-brand-text/60",
                 "transition-all group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start hover:text-brand-text",
                 "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1",

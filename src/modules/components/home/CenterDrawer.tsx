@@ -1,6 +1,6 @@
 "use client";
 
-import { XIcon } from "lucide-react";
+import { AtSignIcon, MailIcon, XIcon } from "lucide-react";
 import type { CenterPin } from "@/src/modules/healthCenters/types";
 import {
     Button,
@@ -55,7 +55,7 @@ export function CenterDrawer({
                                     <p className="text-base font-medium">
                                         ¿Cómo llegar?
                                     </p>
-                                    <div className="flex flex-wrap justify-center gap-2 md:justify-start">
+                                    <div className="flex flex-wrap gap-2 justify-start">
                                         <Button
                                             nativeButton={false}
                                             size="sm"
@@ -117,15 +117,21 @@ export function CenterDrawer({
                                                         href={instagram.href}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className="col-start-2 row-start-2 text-brand-surface-text underline">
-                                                        {instagram.handle}
+                                                        className="col-start-2 row-start-2 inline-flex items-center gap-1 text-brand-surface-text">
+                                                        <AtSignIcon className="size-4 shrink-0" />
+                                                        <span className="underline">
+                                                            {instagram.handle}
+                                                        </span>
                                                     </a>
                                                 ) : (
                                                     email && (
                                                         <a
                                                             href={`mailto:${email}`}
-                                                            className="col-start-2 row-start-2 text-brand-surface-text underline">
-                                                            {email}
+                                                            className="col-start-2 row-start-2 inline-flex items-center gap-1 text-brand-surface-text">
+                                                            <MailIcon className="size-4 shrink-0" />
+                                                            <span className="underline">
+                                                                {email}
+                                                            </span>
                                                         </a>
                                                     )
                                                 )}

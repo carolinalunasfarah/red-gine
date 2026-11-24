@@ -2,6 +2,7 @@ import type {
     CenterPin,
     Gynecologist,
 } from "@/src/modules/healthCenters/types";
+import { MapPin } from "lucide-react";
 
 export function GynecologistList({
     title,
@@ -31,8 +32,13 @@ export function GynecologistList({
                                     <button
                                         type="button"
                                         onClick={() => onSelect(center)}
-                                        className="cursor-pointer text-left text-sm text-brand-text/80 underline">
-                                        {center.name}
+                                        className="cursor-pointer text-left text-md text-brand-text/80 underline mt-2">
+                                        <section className="flex items-center">
+                                            <MapPin className="size-4 mr-1" />
+                                            <span className="inline-block">
+                                                {center.name}
+                                            </span>
+                                        </section>
                                     </button>
                                 </li>
                             ))}

@@ -47,7 +47,8 @@ export function Search({
 
     return (
         <div className="flex flex-col gap-2">
-            <div className="flex w-full gap-2">
+            <h2 className="text-md font-medium">Buscar por:</h2>
+            <div className="flex w-full gap-2 mb-2">
                 <Button
                     size="sm"
                     className="min-w-0 flex-1 shrink md:w-auto md:flex-none"
@@ -78,7 +79,7 @@ export function Search({
                                 comuna: "",
                             })
                         }>
-                        <SelectTrigger className="w-full min-w-0 flex-1">
+                        <SelectTrigger className="w-full min-w-0 md:flex-1">
                             <SelectValue placeholder="Región" />
                         </SelectTrigger>
                         <SelectContent>
@@ -104,7 +105,7 @@ export function Search({
                             onValueChange={(next) =>
                                 onChange({ ...value, comuna: next ?? "" })
                             }>
-                            <SelectTrigger className="w-full min-w-0 flex-1">
+                            <SelectTrigger className="w-full min-w-0 md:flex-1">
                                 <SelectValue placeholder="Comuna" />
                             </SelectTrigger>
                             <SelectContent>
@@ -128,7 +129,7 @@ export function Search({
                             })
                         }
                         placeholder="Nombre del centro"
-                        className="min-w-0 flex-1"
+                        className="min-w-0 md:flex-1"
                     />
                     <Button
                         size="sm"
@@ -149,7 +150,7 @@ export function Search({
                             })
                         }
                         placeholder="Nombre o apellido"
-                        className="min-w-0 flex-1"
+                        className="min-w-0 md:flex-1"
                     />
                     <Button
                         size="sm"
