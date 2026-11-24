@@ -25,22 +25,23 @@ export function InformationSections() {
 
 function InformationSection({ topic }: { topic: InformationTopic }) {
     return (
-        <Collapsible className="flex shrink-0 basis-auto flex-col overflow-hidden rounded-2xl border border-brand-accent-surface-text bg-brand-accent-surface">
+        <Collapsible className="flex shrink-0 basis-auto flex-col overflow-hidden rounded-2xl border border-brand-surface-text bg-brand-surface text-brand-surface-text md:border-brand-accent-surface-text md:bg-brand-accent-surface md:text-brand-accent-surface-text">
             <CollapsibleTrigger
                 className={cn(
                     buttonVariants({ variant: "accent" }),
+                    "bg-brand-surface text-brand-surface-text hover:bg-brand-surface/85 hover:text-brand-surface-text md:bg-brand-accent-surface md:text-brand-accent-surface-text md:hover:bg-brand-accent-surface/85 md:hover:text-brand-accent-surface-text",
                     "group h-auto w-full shrink-0 justify-between rounded-none px-5 py-3 text-left whitespace-normal font-semibold",
                 )}>
                 {topic.title}
                 <ChevronDown className="size-4 shrink-0 transition-transform group-data-panel-open:rotate-180" />
             </CollapsibleTrigger>
-            <CollapsibleContent className="bg-brand-accent">
+            <CollapsibleContent className="bg-brand-surface text-brand-surface-text md:bg-brand-accent md:text-brand-text">
                 <ScrollArea
                     className={cn(
-                        "h-64 max-h-64 bg-brand-accent md:h-auto md:max-h-none",
+                        "h-64 max-h-64 bg-brand-background text-brand-text md:h-auto md:max-h-none md:bg-brand-accent md:text-brand-text",
                         "**:data-[slot=scroll-area-viewport]:max-h-64 md:**:data-[slot=scroll-area-viewport]:h-auto md:**:data-[slot=scroll-area-viewport]:max-h-none",
-                        "**:data-[slot=scroll-area-scrollbar]:top-2! **:data-[slot=scroll-area-scrollbar]:bottom-2! **:data-[slot=scroll-area-scrollbar]:w-1.5! **:data-[slot=scroll-area-scrollbar]:rounded-full **:data-[slot=scroll-area-scrollbar]:bg-brand-text/25",
-                        "**:data-[slot=scroll-area-thumb]:rounded-full **:data-[slot=scroll-area-thumb]:bg-brand-text",
+                        "**:data-[slot=scroll-area-scrollbar]:top-2! **:data-[slot=scroll-area-scrollbar]:bottom-2! **:data-[slot=scroll-area-scrollbar]:w-1.5! **:data-[slot=scroll-area-scrollbar]:rounded-full **:data-[slot=scroll-area-scrollbar]:bg-brand-surface-text/25 md:**:data-[slot=scroll-area-scrollbar]:bg-brand-text/25",
+                        "**:data-[slot=scroll-area-thumb]:rounded-full **:data-[slot=scroll-area-thumb]:bg-brand-surface-text md:**:data-[slot=scroll-area-thumb]:bg-brand-text",
                     )}>
                     <div className="px-5 pr-6 py-4 text-sm md:text-base leading-relaxed">
                         <p>
