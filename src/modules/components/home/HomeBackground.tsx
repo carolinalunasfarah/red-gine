@@ -16,6 +16,30 @@ const SECOND_WAVE_SCALE = 1.25;
 const WAVE_SHIFT_X = 200;
 const WAVE_SHIFT_Y = 160;
 
+const VERTICAL_WAVE_WIDTH = 1040;
+const VERTICAL_WAVE_HEIGHT = 1440;
+
+function verticalWaveTile() {
+    const stops = SECOND_WAVE_STOPS.map(
+        ({ offset, color }) =>
+            `<stop offset="${offset}" stop-color="${color}"/>`,
+    ).join("");
+    const paths = WAVE_PATHS.map((path, index) => {
+        const fill =
+            index === 1 ? BRAND_ACCENT : "url(#home-wave-vertical-second)";
+        const transform =
+            index === 0
+                ? `scale(1 ${SECOND_WAVE_SCALE}) rotate(-180 720 350)`
+                : "rotate(-180 720 350)";
+
+        return `<path d="${path}" fill="${fill}" fill-opacity="${WAVE_OPACITIES[index]}" transform="${transform}"/>`;
+    }).join("");
+
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${VERTICAL_WAVE_WIDTH} ${VERTICAL_WAVE_HEIGHT}" preserveAspectRatio="xMinYMid meet"><defs><linearGradient id="home-wave-vertical-second" gradientUnits="userSpaceOnUse" x1="720" y1="700" x2="720" y2="0">${stops}</linearGradient></defs><rect x="0" y="0" width="${WAVE_SHIFT_X + 50}" height="${VERTICAL_WAVE_HEIGHT}" fill="${BRAND_ACCENT}"/><g transform="translate(${WAVE_SHIFT_X} 0) translate(0 ${VERTICAL_WAVE_HEIGHT}) rotate(-90)">${paths}</g></svg>`;
+}
+
+const VERTICAL_WAVE_BACKGROUND = `url("data:image/svg+xml,${encodeURIComponent(verticalWaveTile())}")`;
+
 function Wave({
     id,
     width,
@@ -27,7 +51,7 @@ function Wave({
     width: number;
     height: number;
     vertical: boolean;
-    className: string;
+    className?: string;
 }) {
     const paths = WAVE_PATHS.map((path, index) => (
         <path
@@ -104,12 +128,13 @@ export function HomeBackground() {
                 vertical={false}
                 className={`${className} h-[75dvh] w-full md:hidden`}
             />
-            <Wave
-                id="home-wave-vertical"
-                width={1040}
-                height={1440}
-                vertical
-                className={`${className} hidden h-full w-[54%] md:block`}
+            <div
+                aria-hidden
+                className={`${className} inset-y-0 hidden h-full w-[54%] bg-repeat-y md:block`}
+                style={{
+                    backgroundImage: VERTICAL_WAVE_BACKGROUND,
+                    backgroundSize: "100% auto",
+                }}
             />
         </>
     );

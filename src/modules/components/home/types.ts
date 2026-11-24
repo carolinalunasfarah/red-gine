@@ -18,3 +18,9 @@ export type CenterSearch = {
 export type MapFrame = "default" | "results";
 
 export type SwipeDirection = "down" | "right";
+
+export type InformationTopic = {
+    title: string;
+    description: string;
+    points: string[];
+};

@@ -1,5 +1,6 @@
 export * from "./Button";
 export * from "./Card";
+export * from "./Collapsible";
 export * from "./Dialog";
 export * from "./Drawer";
 export * from "./DropdownMenu";
@@ -7,5 +8,6 @@ export * from "./ErrorMessage";
 export * from "./Input";
 export * from "./Label";
 export * from "./Select";
+export * from "./ScrollArea";
 export * from "./Skeleton";
 export * from "./Tabs";
