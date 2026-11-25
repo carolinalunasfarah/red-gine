@@ -1,4 +1,6 @@
 export * from "./CenterDrawer";
+export * from "./ContactForm";
+export * from "./ContactDialog";
 export * from "./Explorer";
 export * from "./CenterList";
 export * from "./GynecologistList";

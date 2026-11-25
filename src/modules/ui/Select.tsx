@@ -2,6 +2,8 @@
 
 import * as React from "react";
 import { Select as SelectPrimitive } from "@base-ui/react/select";
+import { DismissableLayerBranch } from "@radix-ui/react-dismissable-layer";
+import { useFocusScopeBranch } from "@radix-ui/react-focus-scope";
 import { cn } from "@/src/modules/utils";
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 
@@ -88,32 +90,45 @@ function SelectContent({
     >) {
     return (
         <SelectPrimitive.Portal>
-            <SelectPrimitive.Positioner
-                side={side}
-                sideOffset={sideOffset}
-                align={align}
-                alignOffset={alignOffset}
-                alignItemWithTrigger={alignItemWithTrigger}
-                collisionAvoidance={collisionAvoidance}
-                className="isolate z-50">
-                <SelectPrimitive.Popup
-                    data-slot="select-content"
-                    data-align-trigger={alignItemWithTrigger}
-                    className={cn(
-                        "relative isolate z-50 max-h-(--available-height) w-(--anchor-width) min-w-36 origin-(--transform-origin) overflow-x-hidden",
-                        "overflow-y-auto rounded-lg bg-brand-surface text-brand-surface-text shadow-md ring-1 ring-brand-surface/10 duration-100",
-                        "data-[align-trigger=true]:animate-none data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2",
-                        "data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-                        "data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
-                        className,
-                    )}
-                    {...props}>
-                    <SelectScrollUpButton />
-                    <SelectPrimitive.List>{children}</SelectPrimitive.List>
-                    <SelectScrollDownButton />
-                </SelectPrimitive.Popup>
-            </SelectPrimitive.Positioner>
+            <SelectPopupFrame>
+                <SelectPrimitive.Positioner
+                    side={side}
+                    sideOffset={sideOffset}
+                    align={align}
+                    alignOffset={alignOffset}
+                    alignItemWithTrigger={alignItemWithTrigger}
+                    collisionAvoidance={collisionAvoidance}
+                    className="isolate z-80 pointer-events-auto">
+                    <SelectPrimitive.Popup
+                        data-slot="select-content"
+                        data-align-trigger={alignItemWithTrigger}
+                        className={cn(
+                            "relative isolate z-50 max-h-(--available-height) w-(--anchor-width) min-w-36 origin-(--transform-origin) overflow-x-hidden",
+                            "overflow-y-auto rounded-lg bg-brand-surface text-brand-surface-text shadow-md ring-1 ring-brand-surface/10 duration-100",
+                            "data-[align-trigger=true]:animate-none data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2",
+                            "data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+                            "data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+                            className,
+                        )}
+                        {...props}>
+                        <SelectScrollUpButton />
+                        <SelectPrimitive.List>{children}</SelectPrimitive.List>
+                        <SelectScrollDownButton />
+                    </SelectPrimitive.Popup>
+                </SelectPrimitive.Positioner>
+            </SelectPopupFrame>
         </SelectPrimitive.Portal>
+    );
+}
+
+function SelectPopupFrame({ children }: { children: React.ReactNode }) {
+    const [node, setNode] = React.useState<HTMLDivElement | null>(null);
+    useFocusScopeBranch(node);
+
+    return (
+        <DismissableLayerBranch ref={setNode} className="contents">
+            {children}
+        </DismissableLayerBranch>
     );
 }
 

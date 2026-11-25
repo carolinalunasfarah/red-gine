@@ -47,18 +47,18 @@ export function Search({
 
     return (
         <div className="flex flex-col gap-2">
-            <h2 className="text-md font-medium">Buscar por:</h2>
+            <h2 className="text-xl md:text-md font-medium">Buscar por:</h2>
             <div className="flex w-full gap-2 mb-2">
                 <Button
                     size="sm"
-                    className="min-w-0 flex-1 shrink md:w-auto md:flex-none"
+                    className="text-sm md:text-base min-w-0 flex-1 shrink md:w-auto md:flex-none"
                     variant={value.mode === "center" ? "secondary" : "outline"}
                     onClick={() => onChange({ ...value, mode: "center" })}>
                     Centro
                 </Button>
                 <Button
                     size="sm"
-                    className="min-w-0 flex-1 shrink md:w-auto md:flex-none"
+                    className="text-sm md:text-base min-w-0 flex-1 shrink md:w-auto md:flex-none"
                     variant={
                         value.mode === "gynecologist" ? "secondary" : "outline"
                     }

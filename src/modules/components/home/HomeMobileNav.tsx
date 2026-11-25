@@ -1,6 +1,6 @@
 "use client";
 
-import { Info, Search, type LucideIcon } from "lucide-react";
+import { Info, Search, Heart, type LucideIcon } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { cn } from "@/src/modules/utils";
 import { tabs, type HomeTab } from "./constants";
@@ -8,14 +8,17 @@ import { tabs, type HomeTab } from "./constants";
 const tabIcons = {
     Info,
     Search,
+    Heart,
 } satisfies Record<(typeof tabs)[number]["icon"], LucideIcon>;
 
 export function HomeMobileNav({
     information,
     map,
+    join,
 }: {
     information: ReactNode;
     map: ReactNode;
+    join: ReactNode;
 }) {
     const [tab, setTab] = useState<HomeTab>("information");
 
@@ -35,7 +38,14 @@ export function HomeMobileNav({
                 )}>
                 {map}
             </section>
-            <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-2 border-t border-brand-surface bg-brand-background pb-[env(safe-area-inset-bottom)] md:hidden">
+            <div
+                className={cn(
+                    "relative z-10 min-h-0 md:hidden",
+                    tab === "join" ? "flex flex-1 flex-col" : "hidden",
+                )}>
+                {join}
+            </div>
+            <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-3 border-t border-brand-surface bg-brand-background pb-[env(safe-area-inset-bottom)] md:hidden">
                 {tabs.map(({ id, label, icon }) => {
                     const selected = tab === id;
                     const TabIcon = tabIcons[icon];
