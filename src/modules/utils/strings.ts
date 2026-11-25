@@ -25,3 +25,9 @@ export function compareSpanishBy<T>(...pick: Array<(item: T) => string>) {
         return 0;
     };
 }
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export function isValidEmail(email: string): boolean {
+    return EMAIL_PATTERN.test(email);
+}
