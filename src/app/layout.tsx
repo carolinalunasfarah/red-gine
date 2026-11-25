@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/src/modules/styles/globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 const interFont = Inter({
     subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
             <body className="flex flex-col min-h-screen bg-brand-background font-sans text-brand-text">
                 <main className="w-full">{children}</main>
                 <SpeedInsights />
+                <Analytics />
             </body>
         </html>
     );
