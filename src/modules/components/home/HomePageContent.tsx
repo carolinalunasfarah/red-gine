@@ -13,6 +13,12 @@ export function HomePageContent({ map }: { map: ReactNode }) {
                     <section className="relative flex min-h-0 flex-1 flex-col overflow-y-auto p-6 pt-12 md:p-8 md:min-h-full md:overflow-visible">
                         <Information />
                         <InformationSections />
+                        <a
+                            href="https://www.minsal.cl/ley-n21-030-informacion-para-la-ciudadania/"
+                            target="_blank"
+                            className="text-sm text-brand-text md:text-brand-accent-surface-text mt-4 block text-start underline">
+                            Fuente: Ministerio de Salud
+                        </a>
                     </section>
                 }
                 map={
