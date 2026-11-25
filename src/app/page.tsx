@@ -1,5 +1,12 @@
-export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center"></div>
-  );
+import { Explorer, HomePageContent } from "@/src/modules/components/home";
+import { getCenterPins } from "@/src/modules/healthCenters/queries";
+
+export default async function Home() {
+    const pins = await getCenterPins();
+
+    return (
+        <div className="min-h-screen sm:min-h-dvh">
+            <HomePageContent map={<Explorer pins={pins} />} />
+        </div>
+    );
 }
